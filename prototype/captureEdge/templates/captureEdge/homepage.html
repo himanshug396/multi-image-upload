@@ -12,21 +12,21 @@
 			</ul>
 		</div>
 		<div>
-			<form class="form-signin" action="" method="post" name="form">
+			<form class="form-details" action="sms/" method="post" name="form">
+				{% csrf_token %}
 				<label for="claim">Claim Details</label>
-				<select class="form-styling claim_id"  id="claim_id" name="claim_id">
-				  <option value="1">Volvo</option>
-				  <option value="2">Saab</option>
-				  <option value="3">Fiat</option>
-				  <option value="4">Audi</option>
+				<select class="form-styling claim_id"  id="claim_id" name="claim_id" required> 
+					{% for claim in claims %}
+					    <option value='{{claim.id}}'>{{claim.description}}</option>
+					{% endfor %}
 				</select>
 				<label for="name">Name</label>
-				<input class="form-styling" type="text" name="name" placeholder=""/>
+				<input class="form-styling" type="text" name="name" placeholder="" required/>
 				<label for="phone">Phone Number</label>
-				<input class="form-styling" type="text" name="phone" placeholder=""/>
-				<div class="btn-signin btn-animate">
+				<input class="form-styling" type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digits" required/>
+				<button type="submit" class="btn-signin btn-animate">
 					Send Link
-				</div>
+				</button>
 			</form>
 		</div>
 </div>

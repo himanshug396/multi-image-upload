@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'captureEdge',
-    'phonenumber_field'
+    'captureEdge'
 ]
 
 MIDDLEWARE = [
@@ -123,9 +122,5 @@ STATICFILES_DIRS = [
     '/static/',
 ]
 STATIC_URL = '/static/'
-
-PHONENUMBER_DB_FORMAT='NATIONAL'
-PHONENUMBER_DEFAULT_REGION='IN'
-
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

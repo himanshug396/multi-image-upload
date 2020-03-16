@@ -66,7 +66,7 @@ li {
   color: #ffffff;
 }
 
-.form-signin {
+.form-details {
   width: 430px;
   height: 375px;
   font-size: 16px;
@@ -77,12 +77,12 @@ li {
   transition: opacity .5s ease, transform .5s ease;
 }
 
-.form-signin-left {
+.form-details-left {
   transform: translateX(-400px);
   opacity: .0;
 }
 
-.form-signin input, .form-signup input {
+.form-details input, .form-signup input {
   color: #ffffff;
   font-size: 13px;
 }
@@ -111,7 +111,7 @@ label {
 :focus {outline: none;
 }
 
-.form-signin input:focus, textarea:focus, .form-signup input:focus, textarea:focus {
+.form-details input:focus, textarea:focus, .form-signup input:focus, textarea:focus, select:focus {
     background: rgba(255,255,255,.3);
     border: none; 
     padding-right: 40px;

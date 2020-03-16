@@ -1,5 +1,4 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 class BaseModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -19,7 +18,7 @@ class Phone(BaseModel):
     id = models.AutoField(primary_key=True)
     claim_id = models.ForeignKey(Claim, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
-    phone = PhoneNumberField(null=False, blank=False)
+    phone = models.CharField(max_length=13, blank=False, help_text='Must be a 10 digit number')
     def __str__(self):
         return str(self.claim_id) + '_' + self.name + '_' + str(self.phone)
 
