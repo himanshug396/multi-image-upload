@@ -15,12 +15,14 @@ class Claim(BaseModel):
         return str(self.id) + '_' + self.description
 
 class Phone(BaseModel):
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, unique=True)
     claim_id = models.ForeignKey(Claim, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
     phone = models.CharField(max_length=13, blank=False, help_text='Must be a 10 digit number')
     def __str__(self):
         return str(self.claim_id) + '_' + self.name + '_' + str(self.phone)
+    class Meta:
+        unique_together = ('claim_id', 'phone')
 
 class Photo(BaseModel):
     id = models.AutoField(primary_key=True)

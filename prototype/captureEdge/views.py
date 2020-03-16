@@ -17,9 +17,10 @@ def user_details(request):
 		phone = request.POST.get('phone')
 		
 		claim_obj = Claim.objects.get(pk=claim_id)
-		claim_obj.name = name
-		claim_obj.phone = phone
-		claim_obj.save()
+		try:
+			claim_obj.phone_set.create(name=name,phone = phone)
+		except:
+			return HttpResponse("Failure: " + "The Phone is already associated with the chosen ClaimID")
 		
 		image_url = str(claim_id) + '/' + phone + '/'
 	
