@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-# Create your views here.
+def homepage(request):
+    return render(request, 'captureEdge/homepage.html')
+
+def phone(request, name, phone, claim_id):
+    response = "%s %s %s"
+    return HttpResponse(response % phone % name % claimID)
+
