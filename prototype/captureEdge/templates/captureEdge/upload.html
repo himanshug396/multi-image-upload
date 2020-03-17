@@ -1,0 +1,45 @@
+{% load static %}
+<!-- 
+<form method='POST' action="" enctype='multipart/form-data'>
+{% csrf_token %}
+
+	{{ formset.management_form }}
+    {% for form in formset %}
+        {{ form }}
+    {% endfor %}
+<input type="submit" name="submit" value="Submit">
+</form> -->
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <form class="form-details" action="{% url 'upload_images' %}" method="post" name="upload-form" enctype=”multipart/form-data”>
+    	{% csrf_token %}
+        <div class="" style="padding-top: 20px;">
+            <div class="form-header">
+                <h3 class="form-title">
+                    Claim: {{claim_description}}
+                </h3>
+                <h5></h5>
+            </div>
+            <div class="">
+                <div class="">
+                    <fieldset class="form-group">
+                        <a href="javascript:void(0)" onclick="$('#pro-image').click()" class="btn  btn-default btn-file">Click to Select Images</a>
+                        <input type="file" class="pro-image" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                    </fieldset>
+                    <div class="preview-images-zone">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="">
+                <input type="submit" class="btn btn-next btn-next btn-wd" name="next" value="Upload">
+            </div>
+        </div>
+    </form>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+

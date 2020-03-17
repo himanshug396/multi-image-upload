@@ -18,7 +18,7 @@ class Phone(BaseModel):
     id = models.AutoField(primary_key=True, unique=True)
     claim_id = models.ForeignKey(Claim, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
-    phone = models.CharField(max_length=13, blank=False, help_text='Must be a 10 digit number')
+    phone = models.CharField(max_length=10, blank=False, help_text='Must be a 10 digit number')
     def __str__(self):
         return str(self.claim_id) + '_' + self.name + '_' + str(self.phone)
     class Meta:
@@ -28,6 +28,6 @@ class Photo(BaseModel):
     id = models.AutoField(primary_key=True)
     claim_id = models.ForeignKey(Claim, on_delete=models.CASCADE)
     phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    photo = models.ImageField(upload_to=str(claim_id) +'_' + str(phone), verbose_name='Image', height_field=None, width_field=None)
     def __str__(self):
         return str(self.phone) + '_' + str(self.id)
