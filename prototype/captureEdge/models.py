@@ -27,7 +27,7 @@ class Phone(BaseModel):
 class Photo(BaseModel):
     id = models.AutoField(primary_key=True)
     claim_id = models.ForeignKey(Claim, on_delete=models.CASCADE)
-    phone = models.ForeignKey(Phone, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to=str(claim_id) +'_' + str(phone), verbose_name='Image', height_field=None, width_field=None)
+    phone = models.CharField(max_length=10, blank=False, help_text='Must be a 10 digit number')
+    photo = models.ImageField(upload_to='media/', verbose_name='Photo', height_field=None, width_field=None)
     def __str__(self):
         return str(self.phone) + '_' + str(self.id)

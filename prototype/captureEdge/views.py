@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
-
+from .forms import ImageForm
 
 def homepage(request):
     claims = Claim.objects.all()
@@ -27,49 +27,51 @@ def user_details(request):
 		#image_url send to the person on his phone
 	return HttpResponse("success: " + image_url)
 
-def upload_form(request, claim_id, phone):
-	request.session['claim_id'] = claim_id
-	request.session['phone'] = phone
-	# if request.method == 'POST':
-	# 	form_create = ImageForm(request.POST or None, request.FILES or None,)
-	# 	if form_create.is_valid():
-	# 		for field in request.FILES.keys():
-	# 			for formfile in request.FILES.getlist(field):
-	# 				img = Photo(photo=formfile)
-	# 				img.save()
-	# 				print(img)
-	return render(request, 'captureEdge/upload.html')
-
-
-def upload_images(request):
-	claim_id = request.session['claim_id']
-	phone = request.session['phone']
-	if request.method == 'POST':
-		print(request.FILES.keys())
-		for field in request.FILES.keys():
-			for formfile in request.FILES.getlist(field):
-				img = Photo(claim_id=claim_id, phone=phone, photo=formfile)
-				img.save()
-				print(img)	
-	print(claim_id)
-	print(phone)
-	
-	return HttpResponse("success: ")
-
-
 # def upload_form(request, claim_id, phone):
-# 	ImageFormSet = modelformset_factory(Photo, form=ImageForm, extra=3)
+# 	request.session['claim_id'] = claim_id
+# 	request.session['phone'] = phone
+# 	# if request.method == 'POST':
+# 	# 	form_create = ImageForm(request.POST or None, request.FILES or None,)
+# 	# 	if form_create.is_valid():
+# 	# 		for field in request.FILES.keys():
+# 	# 			for formfile in request.FILES.getlist(field):
+# 	# 				img = Photo(photo=formfile)
+# 	# 				img.save()
+# 	# 				print(img)
+# 	return render(request, 'captureEdge/upload.html')
+
+
+# def upload_images(request):
+# 	claim_id = request.session['claim_id']
+# 	phone = request.session['phone']
 # 	if request.method == 'POST':
-# 		formset = ImageFormSet(request.POST, request.FILES, queryset=Images.objects.none())
-# 		if formset.is_valid():
-# 			for form in formset.cleaned_data:
-# 				image = form['image']
-# 				photo = Photo(claim_id=claim_id, phone=phone, photo=image)
-# 				photo.save()
-# 				# messages.success(request,"Posted!")
-# 			return HttpResponseRedirect('captureEdge/upload.html')
-# 		else:
-# 			print(formset.errors)
-# 	else:
-# 		formset = ImageFormSet(queryset=Photo.objects.none())
-# 	return render(request, 'captureEdge/upload.html', {'formset': formset})
+# 		print(request.FILES('pro-image'))
+# 		for field in request.FILES.keys():
+# 			for formfile in request.FILES.getlist(field):
+# 				img = Photo(claim_id=claim_id, phone=phone, photo=formfile)
+# 				img.save()
+# 				print(img)	
+# 	print(claim_id)
+# 	print(phone)
+	
+# 	return HttpResponse("success: ")
+
+def upload_form(request, claim_id, phone):
+	if request.method == 'POST':
+		form = ImageForm(request.POST or None, request.FILES or None,)
+		if form.is_valid():
+			for field in request.FILES.keys():
+				for formfile in request.FILES.getlist(field):
+					claim_obj = Claim.objects.get(pk=int(claim_id))
+					claim_obj.photo_set.create(phone=phone, photo=formfile)
+					# claim_obj.phone_id = str(phone)
+					# claim_obj['phone'] = phone
+					claim_obj.save()
+					# img = Photo(claim_id=claim_id, phone=phone, photo=formfile)
+					# img.save()
+					# print(img)
+			return HttpResponse('success') 
+	else:
+		print('else')
+		form = ImageForm()
+	return render(request, 'captureEdge/upload.html', {'form': form})

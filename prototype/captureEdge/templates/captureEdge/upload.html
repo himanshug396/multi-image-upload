@@ -1,20 +1,16 @@
 {% load static %}
-<!-- 
-<form method='POST' action="" enctype='multipart/form-data'>
+
+<form method='POST' enctype='multipart/form-data'>
 {% csrf_token %}
-
-	{{ formset.management_form }}
-    {% for form in formset %}
-        {{ form }}
-    {% endfor %}
+{{form.as_p}}
 <input type="submit" name="submit" value="Submit">
-</form> -->
+</form>
 
-
+<!-- 
 <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
-    <form class="form-details" action="{% url 'upload_images' %}" method="post" name="upload-form" enctype=”multipart/form-data”>
+    <form class="form-details" action="" method="post" name="upload-form" enctype=”multipart/form-data”>
     	{% csrf_token %}
         <div class="" style="padding-top: 20px;">
             <div class="form-header">
@@ -42,4 +38,4 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
-
+ -->
