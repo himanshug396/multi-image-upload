@@ -1,14 +1,23 @@
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'css/jquery.toastmessage.css' %}">
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+{% include "toast.html" %}
+<script src="{% static 'js/jquery.toastmessage.js' %}"></script>
+<script type="text/javascript">
+    // $().toastmessage('showSuccessToast', "Hello there! Message is shown.");
+</script>
+
+
+
 
 <div class="container">
 	<div class="frame">
 		<div class="nav">
 			<ul class"links">
-				<li class="btn">Enter Details to Upload</li>
+				<li class="btn">Enter Details to Send link to User</li>
 			</ul>
 		</div>
 		<div>
@@ -24,14 +33,9 @@
 				<input class="form-styling" type="text" name="name" placeholder="" required/>
 				<label for="phone">Phone Number</label>
 				<input class="form-styling" type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digits" required/>
-				<button type="submit" class="btn-signin btn-animate">
+				<button type="submit" class="btn-signin">
 					Send Link
 				</button>
 			</form>
 		</div>
 </div>
-
-<!-- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script> -->
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
